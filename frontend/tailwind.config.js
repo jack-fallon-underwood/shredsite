@@ -18,8 +18,7 @@ export default {
             left: '50%',
           },
           '100%': {
-            transform: 'translate(calc(100vw - 40px), calc(100vh - 40px))', // Corrected translation
-            //  We do NOT set position: fixed here.  That's done in the className.
+            transform: 'translate(calc(0vw + 40px), calc(70vh))', // Corrected translation
             top: '0px',
             left: '0px',
           },

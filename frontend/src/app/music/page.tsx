@@ -11,7 +11,7 @@ const MusicPage = () => {
 
   return (
     <div style={{ backgroundColor: 'black', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
-      <Navbar />
+
       <div style={{ marginTop: '0%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <h1 style={{ marginBottom: '5%' }}>Soundtrack Performers</h1>
       </div>

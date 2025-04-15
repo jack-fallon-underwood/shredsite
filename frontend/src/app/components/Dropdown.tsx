@@ -8,12 +8,12 @@ const Dropdown = () => {
         <Navbuttons
           href="https://store.steampowered.com/app/2484270/Shred_The_Undead/"
           text="@ Steam" // Added text prop
-            alignment='left'
+         
         />
         <Navbuttons
           href="https://jackfu.itch.io/shred-the-undead"
           text="itch.io"  // Added text prop
-          alignment='left'
+  
 
         />
       </div>

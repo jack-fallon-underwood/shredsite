@@ -5,8 +5,11 @@ import Navbuttons from './Navbuttons';
 import Link from "next/link";
 import { useClientMediaQuery } from '@/app/hooks/useClientMediaQuery';
 import Dropdown from './Dropdown'; // Assuming you have a Dropdown component
-
+import { useOverlay } from '../context/OverlayContext';
 const Navbar = () => {
+  const { showNavbar, setShowNavBar } = useOverlay();
+
+  if (!showNavbar) return null; 
   const isMobile = useClientMediaQuery('(max-width: 500px)');
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -31,7 +34,7 @@ const Navbar = () => {
       <Navbuttons text="Characters" myStyle={{ color: 'orange' }} href='/characters' />
       <Navbuttons text="Worlds" myStyle={{ color: 'yellow' }} href='/worlds' />
       <Navbuttons text="Music" myStyle={{ color: 'lime' }} href='/music' />
-      <Navbuttons text="Items" myStyle={{ color: 'royalblue' }} href='/items' />
+      <Navbuttons text="Games" myStyle={{ color: 'royalblue' }} href='/items' />
       <Navbuttons text="Upcoming" myStyle={{ color: 'purple' }} href='/upcoming' />
       <div
         onMouseEnter={handleMouseEnterBuyNow}

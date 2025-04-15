@@ -12,6 +12,11 @@ interface ArtistData {
   bio: string;
   albumIds: string[];
   singleIds?: string[];
+  homebase?: string[];
+  genretag?: string[];
+  memberArtists?: string[];
+  associateArtist?: string [];
+
 }
 
 const ARTISTS: Record<string, ArtistData> = {
@@ -119,7 +124,7 @@ const MusicianPage = () => {
 
   return (
     <div style={{ backgroundColor: 'black', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
-      <Navbar />
+  
 
       <h1>{artist.name}</h1>
 
