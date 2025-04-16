@@ -6,6 +6,13 @@ import Navbar from '@/app/components/Navbar';
 import MusicGrid from '@/app/components/MusicGrid';
 import { useParams } from 'next/navigation';
 
+type ChildWithStyle = React.ReactElement<{ style?: React.CSSProperties }>;
+
+interface ArtistLinks{
+  imageSrc: string;
+  link: string;
+}
+
 interface ArtistData {
   name: string;
   imageSrc: string;
@@ -16,6 +23,7 @@ interface ArtistData {
   genretag?: string[];
   memberArtists?: string[];
   associateArtist?: string [];
+  externalLinks?: ArtistLinks[];
 
 }
 
@@ -39,14 +47,15 @@ const ARTISTS: Record<string, ArtistData> = {
     imageSrc: '/ian.jpg',
     bio: 'Ben DeUrso is the drummer for The Bunker Brothers Trio Band and the wizard behind their rhythmic charm.',
     albumIds: ["2249615514", "3773504046", "4265531398"],
-    singleIds:["2334029491", "3433223300", "4247352859","4007036561","4182138612"]
+    singleIds:["2391167764","2334029491", "3433223300", "4247352859","4007036561","4182138612"]
   },
   '4': {
     name:'',
     imageSrc: '/kamen.jpg',
     bio: 'Ben DeUrso is the drummer for The Bunker Brothers Trio Band and the wizard behind their rhythmic charm.',
-    albumIds: ['1111111111', '2222222222'],
-    singleIds:['1111111111', '2222222222']
+    albumIds: ['3017108498', '4117570235'],
+  
+    externalLinks:[{link:'https://kamenross.com', imageSrc :'/k1.jpg'},{link:'https://sexycoyote.com', imageSrc :'/k4.jpg'},{link:'https://rogozo.bandcamp.com/', imageSrc :'/k5.jpg'},{link:'https://osoroso.bandcamp.com/', imageSrc :'/k6.jpg'},{link:'https://kingsorceress.com', imageSrc :'/k7.jpg'}]
   }
 };
 
@@ -56,29 +65,50 @@ interface TileStyle {
   height: string;
 }
 
+
 const ArtistInfoFrame: React.FC<{ children: React.ReactNode; width?: string; height?: string; fontSize?: string }> = ({ children, width, height, fontSize }) => (
   <div style={{ border: '1px solid #ccc', width, height, display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '8px' }}>
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child) && child.type === 'span'
-          ? React.cloneElement(child, { style: { ...child.props.style, fontSize } })
-          : child
-      )}
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child) && child.type === 'span') {
+          const existingStyle = (child as ChildWithStyle).props?.style || {};
+          return React.cloneElement(child as ChildWithStyle, {
+            style: { ...existingStyle, fontSize: fontSize },
+          });
+        }
+        return child;
+      })}
     </div>
   </div>
 );
 
-const ArtistPhotoFrame: React.FC<{ imageSrc: string }> = ({ imageSrc }) => (
+const ArtistPhotoFrame: React.FC<{ imageSrc: string; width?: string; height?: string; }> = ({ imageSrc, width, height }) => (
   <div style={{ border: '1px solid #ccc', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '8px' }}>
-    <img src={imageSrc} alt="Artist" style={{ maxWidth: '100%', height: 'auto' }} />
+    <img
+      src={imageSrc}
+      alt="Artist"
+      style={{
+        width: width,
+        height: height,
+      }}
+    />
   </div>
 );
 
+const ArtistLinkFrame = (props: { elink: ArtistLinks }) => {
+  const { elink } = props;
+
+  return (
+    <a href={elink.link} target="_blank" rel="noopener noreferrer" >
+      <img src={elink.imageSrc} alt="External Link" style={{ width: '100%', height: '100%' }} />
+    </a>
+  );
+};
 const baseSrcA = (albumId: string) =>
   `https://bandcamp.com/EmbeddedPlayer/album=${albumId}/size=large/bgcol=800080/linkcol=0687f5/minimal=true/transparent=true/`;
 
-const AlbumWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div style={{ justifyContent: 'center', width: '50%' }}>
+const TileWrapper = ({ children, width, height }: { children: React.ReactNode; width?: string, height?: string }) => (
+  <div style={{ width, height, justifyContent: 'center', alignItems: 'center' }}>
     {children}
   </div>
 );
@@ -86,21 +116,16 @@ const AlbumWrapper = ({ children }: { children: React.ReactNode }) => (
 const baseSrcT = (singleId: string) =>
   `https://bandcamp.com/EmbeddedPlayer/track=${singleId}/size=large/bgcol=800080/linkcol=0687f5/minimal=true/transparent=true/`;
 
-const SingleWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div style={{ justifyContent: 'center', width: '50%' }}>
-    {children}
-  </div>
-);
 
 const Album = ({ albumId, iframeStyle }: { albumId: string; iframeStyle: React.CSSProperties }) => (
-  <AlbumWrapper>
+  <TileWrapper>
     <iframe style={iframeStyle} src={baseSrcA(albumId)} seamless />
-  </AlbumWrapper>
+  </TileWrapper>
 );
 const Single = ({ singleId, iframeStyle }: { singleId: string; iframeStyle: React.CSSProperties }) => (
-  <SingleWrapper>
+  <TileWrapper>
     <iframe style={iframeStyle} src={baseSrcT(singleId)} seamless />
-  </SingleWrapper>
+    </TileWrapper>
 );
 
 const MusicianPage = () => {
@@ -129,7 +154,12 @@ const MusicianPage = () => {
       <h1>{artist.name}</h1>
 
       <MusicGrid>
-        <AlbumWrapper><ArtistPhotoFrame imageSrc={artist.imageSrc} /></AlbumWrapper>
+        <TileWrapper><ArtistPhotoFrame imageSrc={artist.imageSrc} width={currentIframeStyle.width} height={currentIframeStyle.height} /></TileWrapper>
+      
+            {artist.externalLinks && artist.externalLinks.map((elink, index) => (
+            <TileWrapper width={currentIframeStyle.width} height={currentIframeStyle.height}>    <ArtistLinkFrame key={index} elink={elink} />
+              </TileWrapper>))}
+      
         
         <ArtistInfoFrame width={currentIframeStyle.width} height={currentIframeStyle.height} fontSize={currentFontSize}>
           <span>{artist.bio}</span>
