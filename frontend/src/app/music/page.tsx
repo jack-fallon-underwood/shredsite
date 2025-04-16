@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import Navbar from '@/app/components/Navbar';
 import MusicGrid from '@/app/components/MusicGrid';
 import Link from 'next/link';
+
 
 const MusicPage = () => {
   const albumRoutes = ['/music/1', '/music/2', '/music/3', '/music/4'];
   const imageSources = ['/jack.png', '/ben.png', '/ian.jpg', '/kamen.jpg']; // Replace with your actual image paths
-
+  
   return (
     <div style={{ backgroundColor: 'black', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
 
