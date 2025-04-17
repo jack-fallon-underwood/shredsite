@@ -10,12 +10,13 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center flex-col min-h-screen">
+      <div className="flex items-center justify-center w-full">
  
 
         {showNavbar && (
           <>
-            <iframe
+           <div className = 'flex flex-col pt-40'>
+           <iframe
               className="mt-4"
               width="560"
               height="315"
@@ -26,46 +27,54 @@ const Home = () => {
             ></iframe>
 
             {/* Social & Contact Links */}
-            <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex gap-6 z-50">
+            <div className="flex gap-9 z-50 max-w-sm">
               {/* Instagram */}
-              <a
-                href="https://www.instagram.com/shredtheundead/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="/R.png"
-                  alt="Instagram"
-                  className="w-12 h-12 hover:opacity-80 transition duration-300"
-                />
-              </a>
+<a
+  href="https://www.instagram.com/shredtheundead/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Image
+    src="/R.png"
+    alt="Instagram"
+    width={48}
+    height={48}
+    className="hover:opacity-80 transition duration-300"
+  />
+</a>
 
-              {/* LinkedIn */}
-              <a
-                href="https://www.linkedin.com/in/jack-underwood/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="/Rr.png"
-                  alt="LinkedIn"
-                  className="w-12 h-12 hover:opacity-80 transition duration-300"
-                />
-              </a>
+{/* LinkedIn */}
+<a
+  href="https://www.linkedin.com/in/jack-underwood/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Image
+    src="/Rr.png"
+    alt="LinkedIn"
+    width={48}
+    height={48}
+    className="hover:opacity-80 transition duration-300"
+  />
+</a>
 
-              {/* Email */}
-              <a
-                href="mailto:musicians.shredtheundead@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="/Rrr.png"
-                  alt="Email"
-                  className="w-12 h-12 hover:opacity-80 transition duration-300"
-                />
-              </a>
+{/* Email */}
+<a
+  href="mailto:musicians.shredtheundead@gmail.com"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Image
+    src="/Rrr.png"
+    alt="Email"
+    width={48}
+    height={48}
+    className="hover:opacity-80 transition duration-300"
+  />
+</a>
+
             </div>
+           </div>
           </>
         )}
       </div>
