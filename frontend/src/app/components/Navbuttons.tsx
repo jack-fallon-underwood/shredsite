@@ -13,6 +13,7 @@ interface ButtonProps {
   variant?: "inner" | "outer";
   onMouseEnterDropdown?: () => void;
   onMouseLeaveDropdown?: () => void;
+  fontSize?: string;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -23,7 +24,10 @@ const Button: FC<ButtonProps> = ({
   myStyle,
   onMouseEnterDropdown,
   onMouseLeaveDropdown,
+  fontSize = "text-base",
 }) => {
+  const hoverClass = href ? "hover:text-black-500" : "";
+  const buttonClasses = `btn-${variant} border-1 border-white ${hoverClass} ${fontSize}`;
 
   return (
     <>
@@ -32,7 +36,7 @@ const Button: FC<ButtonProps> = ({
           <button
             type="button"
             disabled={disabled}
-            className={`btn-${variant} border-1 border-white hover:text-black-500`}
+            className={buttonClasses}
             style={myStyle}
             onMouseEnter={onMouseEnterDropdown}
             onMouseLeave={onMouseLeaveDropdown}
@@ -41,10 +45,10 @@ const Button: FC<ButtonProps> = ({
           </button>
         </Link>
       ) : (
-        <button // Render a plain button if no href is provided
+        <button
           type="button"
           disabled={disabled}
-          className={`btn-${variant} border-1 border-white`} // Remove hover effect if not a link
+          className={buttonClasses}
           style={myStyle}
           onMouseEnter={onMouseEnterDropdown}
           onMouseLeave={onMouseLeaveDropdown}

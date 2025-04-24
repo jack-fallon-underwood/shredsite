@@ -6,7 +6,7 @@ import ImageGallery from '../components/ImageGallery';
 const CharacterPage = () => {
   const images = ['g.jpg', 'd.jpg', 'p.jpg', 'b.jpg'];
   const characterInfo = [
-    { name: 'Character 1', description: 'Description of Character 1.' },
+    { name: 'Ami the Guitarist', description: 'Description of Character 1.' },
     { name: 'Russo the Drummer', description: 'Description of Character 2.' },
     { name: 'Sara the Pianist', description: 'Description of Character 3.' },
     { name: 'Grog the Bassist', description: 'Description of Character 4.' },

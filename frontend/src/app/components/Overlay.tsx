@@ -69,9 +69,15 @@ const Overlay: FC<OverlayProps> = () => {
     setShowNavBar(false);
   };
 
+  const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSubmitName(name);
+    }
+  };
+
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center md:p-8 lg:p-12">
       <div>
         {!submittedName ? (
           <>
@@ -80,6 +86,7 @@ const Overlay: FC<OverlayProps> = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onKeyDown={handleEnter}
               className="border-4 border-white p-2 rounded"
             />
             <button
@@ -92,14 +99,8 @@ const Overlay: FC<OverlayProps> = () => {
         ) : (
           <>
             <p className="animate-move-to-corner text-lg font-bold">
-              Welcome back, {name}!
+              Player 1: {name}
             </p>
-            <button
-              onClick={handleClearCookie}
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-            >
-              Reset
-            </button>
           </>
         )}
       </div>
@@ -122,11 +123,23 @@ const Overlay: FC<OverlayProps> = () => {
 
       {/* Display animated selected instrument */}
       {submittedInstrument && (
-        <div className="animate-move-to-corner mt-8 text-lg font-bold">
-          You have selected the {instrument}!
-        </div>
+        <img
+        className="animate-move-to-corner mt-8"
+        style={{ maxHeight: '10vh' }}
+        src={instruments.find(i => i.name === instrument)?.src}
+        alt={instrument}
+      />
       )}
-    </div>
+
+{submittedName && (
+  <button
+  onClick={handleClearCookie}
+  className="animate-move-to-corner mt-4 px-4 py-2  rounded flex flex-col items-center justify-center"
+>
+  Change Musician
+</button>
+    )}
+  </div>
   );
 };
 
