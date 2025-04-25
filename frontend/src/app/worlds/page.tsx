@@ -24,7 +24,7 @@ const WorldPage = () => {
           textAlign: 'center',
         }}
       >
-        <h1 style={{ marginBottom: '20px' }}>Image Showcase</h1>
+        <h1 style={{ marginBottom: '20px' }}>The Band</h1>
         <ImageGallery images={images} characterInfo={characterInfo} />
       </div>
     </>

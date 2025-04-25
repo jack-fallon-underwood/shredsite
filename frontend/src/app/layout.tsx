@@ -5,6 +5,7 @@ import "./globals.css";
 import { OverlayProvider } from './context/OverlayContext'; 
 import Navbar from './components/Navbar';
 import Overlay from "./components/Overlay";
+import SocialBar from "./components/SocialBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,8 @@ export default function RootLayout({
           <Navbar />
           {children}
         </OverlayProvider>
+        <footer><SocialBar/></footer>
+        
       </body>
     </html>
   );

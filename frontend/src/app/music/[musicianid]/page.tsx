@@ -46,8 +46,8 @@ const ARTISTS: Record<string, ArtistData> = {
     name:'',
     imageSrc: '/ian.jpg',
     bio: 'Ben DeUrso is the drummer for The Bunker Brothers Trio Band and the wizard behind their rhythmic charm.',
-    albumIds: ["2249615514", "3773504046", "4265531398"],
-    singleIds:["2391167764","2334029491", "3433223300", "4247352859","4007036561","4182138612"]
+    albumIds: ["2249615514", "3773504046"],
+    singleIds:["4007036561","2334029491","2391167764", "3433223300", "4247352859","4182138612"]
   },
   '4': {
     name:'',

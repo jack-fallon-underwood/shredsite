@@ -87,7 +87,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, characterInfo }) =>
                 />
                 <div>
                   <h2 style={{ fontSize: '24px' }}>{characterInfo[index].name}</h2>
-                  <p style={{ fontSize: '16px', textAlign: 'left' }}>{characterInfo[index].description}</p>
+                  <p style={{ fontSize: '16px', textAlign: 'center', marginTop: '10px'
+                   }}>{characterInfo[index].description}</p>
                 </div>
                 <button
                   onClick={handleCloseFocus}
