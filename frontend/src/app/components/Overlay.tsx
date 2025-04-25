@@ -99,7 +99,7 @@ const Overlay: FC<OverlayProps> = () => {
         ) : (
           <>
             <p className="animate-move-to-corner text-lg font-bold">
-              Player 1: {name}
+             {name}
             </p>
           </>
         )}
@@ -136,7 +136,7 @@ const Overlay: FC<OverlayProps> = () => {
   onClick={handleClearCookie}
   className="animate-move-to-corner mt-4 px-4 py-2  rounded flex flex-col items-center justify-center"
 >
-  Change Musician
+  Reset
 </button>
     )}
   </div>
