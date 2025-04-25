@@ -51,9 +51,11 @@ const Navbar = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center w-full mt-8 mb-4">
+    <div className="flex items-center justify-between w-full mt-8 mb-4 px-4 sm:px-6 md:px-8">
+      {/* Left: Logo */}
       <Link href="/" style={{ textDecoration: 'none' }}>
         <h1
+          className="text-left ml-2 sm:ml-0"
           style={{
             color: 'red',
             fontFamily: 'Z',
@@ -64,25 +66,35 @@ const Navbar = () => {
           Shred The Undead
         </h1>
       </Link>
-
-      {/* Hamburger icon on mobile */}
-      <div className="sm:hidden mt-4">
+  
+      {/* Desktop menu (hidden on mobile) */}
+      <div className="hidden sm:flex items-center gap-6">
+        {menuItems}
+      </div>
+  
+      {/* Right: Hamburger icon for mobile */}
+      <div className="sm:hidden mr-2">
         <button onClick={() => setMenuOpen(!menuOpen)} className="focus:outline-none">
           {menuOpen ? <X className="w-8 h-8 text-white" /> : <Menu className="w-8 h-8 text-white" />}
         </button>
       </div>
-
-      {/* Mobile menu */}
+  
+      {/* Full-screen mobile menu with backdrop */}
       {menuOpen && (
-        <div className="flex flex-col items-center gap-3 sm:hidden mt-4">{menuItems}</div>
+        <div className="fixed inset-0 z-[9999] bg-black bg-opacity-60 backdrop-blur-sm transition-opacity duration-300 ease-in-out">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-6">
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-6 right-6 text-white hover:scale-110 transition-transform duration-200"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            {menuItems}
+          </div>
+        </div>
       )}
-
-      {/* Desktop menu */}
-      <div className="navbar-container hidden sm:flex sm:flex-col justify-center items-center p-4 sm:p-6 md:p-8">
-        {menuItems}
-      </div>
     </div>
   );
-};
+}  
 
 export default Navbar;

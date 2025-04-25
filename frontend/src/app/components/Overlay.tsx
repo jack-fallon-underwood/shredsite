@@ -25,7 +25,8 @@ const Overlay: FC<OverlayProps> = () => {
       { name: 'flute', src: '/fluteLogo.png', alt: 'Flute' },
       { name: 'guitar', src: '/guitarLogo.png', alt: 'Guitar' },
       { name: 'perc', src: '/percLogo.png', alt: 'Percussion' },
-      { name: 'piano', src: '/pianoLogo.png', alt: 'Piano' }
+      { name: 'piano', src: '/pianoLogo.png', alt: 'Piano' },
+      { name: 'sax', src: '/saxLogo.png', alt: 'Sax' }
     ];
 
     useEffect(() => {
@@ -76,70 +77,69 @@ const Overlay: FC<OverlayProps> = () => {
   };
 
 
+  
   return (
     <div className="flex flex-col items-center justify-center md:p-8 lg:p-12">
       <div>
         {!submittedName ? (
-          <>
-            <p className="flex items-center justify-center">Enter your name:</p>
+          <div className="flex flex-col items-center"> {/* Wrapped elements in a container */}
+            <p className="mb-2">Enter your name:</p>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               onKeyDown={handleEnter}
-              className="border-4 border-white p-2 rounded"
+              className="border-4 border-white p-2 rounded text-black"
             />
             <button
               onClick={() => handleSubmitName(name)}
-              className="flex items-center justify-center mt-4 px-4 py-2 text-white rounded"
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
             >
               Submit
             </button>
-          </>
+          </div>
         ) : (
-          <>
-            <p className="animate-move-to-corner text-lg font-bold">
-             {name}
-            </p>
-          </>
+          <p className="animate-move-to-corner text-lg font-bold">
+            {name}
+          </p>
         )}
       </div>
 
       {/* Show instrument selection after name submission */}
       {submittedName && !submittedInstrument && (
-      <div className="flex flex-wrap justify-center mt-8">
-      {instruments.map((instrument) => (
-        <img
-        style={{ maxWidth: '10vh' }}
-          key={instrument.name}
-          src={instrument.src}
-          alt={instrument.alt}
-          onClick={() => handSubmitInstrament(instrument.name)}
-          className="w-24 h-24 m-4 cursor-pointer"
-        />
-      ))}
-    </div>
+        <div className="flex flex-wrap justify-center mt-8">
+          {instruments.map((instrument) => (
+            <img
+              style={{ maxWidth: '10vh' }}
+              key={instrument.name}
+              src={instrument.src}
+              alt={instrument.alt}
+              onClick={() => handSubmitInstrament(instrument.name)}
+              className="w-24 h-24 m-4 cursor-pointer"
+            />
+          ))}
+        </div>
       )}
 
       {/* Display animated selected instrument */}
       {submittedInstrument && (
         <img
-        className="animate-move-to-corner mt-8"
-        style={{ maxHeight: '10vh' }}
-        src={instruments.find(i => i.name === instrument)?.src}
-        alt={instrument}
-      />
+          className="animate-move-to-corner mt-8"
+          style={{ maxHeight: '10vh' }}
+          src={instruments.find(i => i.name === instrument)?.src}
+          alt={instrument}
+        />
       )}
 
-{submittedName && (
-  <button
-  onClick={handleClearCookie}
-  className="animate-move-to-corner mt-4 px-4 py-2  rounded flex flex-col items-center justify-center"
->
-  Reset
-</button>
-    )}
-  </div>
+      {submittedName && (
+        <button
+          onClick={handleClearCookie}
+          className="animate-move-to-corner mt-4 px-4 py-2 rounded flex flex-col items-center justify-center"
+        >
+          Reset
+        </button>
+      )}
+    </div>
   );
 };
 

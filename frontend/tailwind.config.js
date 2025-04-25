@@ -14,13 +14,13 @@ export default {
         'move-to-corner': {
           '0%': {
             transform: 'translate(0, 0)',
-            top: '50%',
-            left: '50%',
+            top: '0%',
+            left: '0%',
           },
           '100%': {
-            transform: 'translate(calc(0vw + 40px), calc(70vh))', // Corrected translation
+            transform: 'translate(calc(0vw + 0px), calc(70vh))', // Corrected translation
             top: '0px',
-            left: '0px',
+            left: '0%',
           },
         },
       },
